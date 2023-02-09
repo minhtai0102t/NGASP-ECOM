@@ -6,6 +6,10 @@ namespace Ecom_API
 		public EmptyClass()
 		{
 		}
+		public class Nothing
+		{
+
+		}
 	}
 }
 

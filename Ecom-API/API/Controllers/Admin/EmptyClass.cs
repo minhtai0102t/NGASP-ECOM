@@ -5,6 +5,7 @@ namespace Ecom_API.API.Controllers.Admin
 	{
 		public EmptyClass()
 		{
+			String test = "";
 		}
 	}
 }

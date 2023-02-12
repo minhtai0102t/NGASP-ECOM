@@ -9,6 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
@@ -23,11 +31,12 @@
     <None Remove="DTO\Response\" />
     <None Remove="Service\Implement\" />
     <None Remove="Service\Interfaces\" />
-    <None Remove="Service\Helpers\" />
     <None Remove="API\Controllers\" />
     <None Remove="API\Controllers\Admin\" />
     <None Remove="API\Controllers\User\" />
     <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="DBHelpers\" />
+    <None Remove="DTO\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\" />
@@ -36,9 +45,10 @@
     <Folder Include="DTO\Response\" />
     <Folder Include="Service\Implements\" />
     <Folder Include="Service\Interfaces\" />
-    <Folder Include="Service\Helpers\" />
     <Folder Include="API\Controllers\" />
     <Folder Include="API\Controllers\Admin\" />
     <Folder Include="API\Controllers\User\" />
+    <Folder Include="DBHelpers\" />
+    <Folder Include="DTO\Models\" />
   </ItemGroup>
 </Project>

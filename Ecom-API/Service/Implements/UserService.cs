@@ -31,7 +31,7 @@ namespace Ecom_API.Service.Implements
             var user = _context.Users.SingleOrDefault(x => x.Username == model.Username);
 
             // validate
-            if (user == null || !Argon2.Verify(model.Password, user.PasswordHash))
+            if (user == null || Argon2.Verify(model.Password, user.PasswordHash))
                 throw new AppException("Username or password is incorrect");
 
             // authentication successful
@@ -45,7 +45,7 @@ namespace Ecom_API.Service.Implements
             return _context.Users;
         }
 
-        public User GetById(int id)
+        public User GetById(Guid id)
         {
             return getUser(id);
         }
@@ -67,9 +67,9 @@ namespace Ecom_API.Service.Implements
             _context.SaveChanges();
         }
 
-        public void Update(int id, UserUpdateReq model)
+        public void Update(Guid uid, UserUpdateReq model)
         {
-            var user = getUser(id);
+            var user = getUser(uid);
 
             // validate
             if (model.Username != user.Username && _context.Users.Any(x => x.Username == model.Username))
@@ -85,7 +85,7 @@ namespace Ecom_API.Service.Implements
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             var user = getUser(id);
             _context.Users.Remove(user);
@@ -93,8 +93,7 @@ namespace Ecom_API.Service.Implements
         }
 
         // helper methods
-
-        private User getUser(int id)
+        private User getUser(Guid id)
         {
             var user = _context.Users.Find(id);
             if (user == null) throw new KeyNotFoundException("User not found");

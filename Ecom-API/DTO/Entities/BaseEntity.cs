@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Ecom_API.DTO.Models
+namespace Ecom_API.DTO.Entities
 {
     public abstract class BaseEntity
     {

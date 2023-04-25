@@ -1,9 +1,8 @@
-﻿using System;
-using Ecom_API.DTO.Entities;
+﻿using Ecom_API.DTO.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Ecom_API.Authorization
+namespace Ecom_API.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter

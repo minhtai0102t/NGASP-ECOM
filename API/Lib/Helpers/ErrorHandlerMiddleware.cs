@@ -2,7 +2,6 @@
 
 using System.Net;
 using System.Text.Json;
-using Ecom_API.Helpers;
 
 public class ErrorHandlerMiddleware
 {

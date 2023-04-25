@@ -1,12 +1,7 @@
-﻿namespace Ecom_API.API.Controllers.User;
-using System;
-using AutoMapper;
-using Ecom_API.Authorization;
-using Ecom_API.Helpers;
+﻿using Ecom_API.Attributes;
 using Ecom_API.DTO.Models;
-using Ecom_API.Service.Interfaces;
+using Ecom_API.Service;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 
 [Authorize]
 [ApiController]
@@ -14,17 +9,10 @@ using Microsoft.Extensions.Options;
 public class UsersController : ControllerBase
 {
     private IUserService _userService;
-    private IMapper _mapper;
-    private readonly AppSettings _appSettings;
 
-    public UsersController(
-        IUserService userService,
-        IMapper mapper,
-        IOptions<AppSettings> appSettings)
+    public UsersController(IUserService userService)
     {
         _userService = userService;
-        _mapper = mapper;
-        _appSettings = appSettings.Value;
     }
 
     [AllowAnonymous]

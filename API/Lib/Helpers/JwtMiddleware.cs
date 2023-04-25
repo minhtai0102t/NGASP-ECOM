@@ -1,5 +1,5 @@
 ﻿using System;
-using Ecom_API.Service.Interfaces;
+using Ecom_API.Service;
 namespace Ecom_API.Authorization
 {
 	public class JwtMiddleware

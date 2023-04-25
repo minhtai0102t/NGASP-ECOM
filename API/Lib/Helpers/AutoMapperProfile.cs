@@ -9,7 +9,7 @@ public class AutoMapperProfile : Profile
     public AutoMapperProfile()
     {
         // User -> AuthenticateResponse
-        CreateMap<User, AuthenticateRes>();
+        CreateMap<User, AuthenticateRes>().ReverseMap();
 
         // RegisterRequest -> User
         CreateMap<UserRegisterReq, User>();

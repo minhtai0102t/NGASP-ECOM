@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Ecom_API.DTO.Entities;
-using Ecom_API.Helpers;
+using Services.CommonConfig;
+using Microsoft.Extensions.Options;
 
 namespace Ecom_API.Authorization;
 

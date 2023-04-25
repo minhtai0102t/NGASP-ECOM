@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Ecom_API.Authorization
+namespace Ecom_API.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class AllowAnonymousAttribute : Attribute

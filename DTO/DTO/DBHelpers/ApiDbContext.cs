@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Ecom_API.DTO.Entities;
 using Microsoft.EntityFrameworkCore;
-using Ecom_API.DTO.Entities;
 
 namespace Ecom_API.DBHelpers
 {

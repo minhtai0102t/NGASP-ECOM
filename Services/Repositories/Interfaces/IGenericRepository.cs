@@ -4,7 +4,7 @@ namespace Services.Repositories
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {
-        Task<List<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(Guid id);
         /// <summary>
         ///      Add a new entity to database
@@ -27,8 +27,8 @@ namespace Services.Repositories
         Task<T> DeleteSoftAsync(Guid id);
         Task<T> FindWithCondition(Expression<Func<T, bool>> predicate);
         Task<IList<T>> WhereAsync(Expression<Func<T, bool>> predicate, params string[] navigationProperties);
-        Task<List<T>> FindAllWithCondition(Expression<Func<T, bool>> predicate = null);
-        Task<List<T>> GetAllActiveAsync();
+        Task<IEnumerable<T>> FindAllWithCondition(Expression<Func<T, bool>> predicate = null);
+        Task<IEnumerable<T>> GetAllActiveAsync();
         Task<T> GetByIdActiveAsync(Guid id);
     }
 }

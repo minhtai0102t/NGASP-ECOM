@@ -2,6 +2,6 @@
 {
     public interface IUnitOfWork
     {
-        public IUserRepository User { get; }
+        public IUserRepository Users { get; }
     }
 }

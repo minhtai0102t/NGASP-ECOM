@@ -10,7 +10,7 @@ namespace Services.Repositories
         }
 
         private IUserRepository _userRepository;
-        public IUserRepository User
+        public IUserRepository Users
         {
             get
             {

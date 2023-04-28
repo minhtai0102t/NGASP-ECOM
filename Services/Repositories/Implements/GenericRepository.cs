@@ -45,7 +45,7 @@ namespace Services.Repositories
         {
             return await dbSet.AsNoTracking().FirstOrDefaultAsync(predicate);
         }
-        public async Task<List<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await dbSet.AsNoTracking().ToListAsync();
         }
@@ -84,7 +84,7 @@ namespace Services.Repositories
                 query = query.Include(navigationProperty);
             return query;
         }
-        public async Task<List<T>> FindAllWithCondition(Expression<Func<T, bool>> predicate = null)
+        public async Task<IEnumerable<T>> FindAllWithCondition(Expression<Func<T, bool>> predicate = null)
         {
             if (predicate == null)
             {
@@ -92,7 +92,7 @@ namespace Services.Repositories
             }
             return await dbSet.AsNoTracking().Where(predicate).ToListAsync();
         }
-        public async Task<List<T>> GetAllActiveAsync()
+        public async Task<IEnumerable<T>> GetAllActiveAsync()
         {
             return await dbSet.AsNoTracking().Where(x => x.is_deleted == false).ToListAsync();
         }

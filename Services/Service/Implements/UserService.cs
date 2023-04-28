@@ -27,18 +27,24 @@ namespace Ecom_API.Service
             _jwtUtils = jwtUtils;
             _mapper = mapper;
         }
-        public AuthenticateRes Authenticate(AuthenticateReq model)
+        public async Task<AuthenticateRes> Authenticate(AuthenticateReq model)
         {
-            var user = _context.Users.SingleOrDefault(x => x.user_name == model.Username);
+            try
+            {
+                var user = await _unitOfWork.Users.FindWithCondition(c => c.username == model.username);
+                // validate
+                if (user == null || !Argon2.Verify(model.password, user.password))
+                    throw new AppException("username or password is incorrect");
 
-            // validate
-            if (user == null || !Argon2.Verify(model.Password, user.password))
-                throw new AppException("Username or password is incorrect");
-
-            // authentication successful
-            var response = _mapper.Map<AuthenticateRes>(user);
-            response.Token = _jwtUtils.GenerateToken(user);
-            return response;
+                // authentication successful
+                var response = _mapper.Map<AuthenticateRes>(user);
+                response.Token = _jwtUtils.GenerateToken(user);
+                return response;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public IEnumerable<User> GetAll()
@@ -51,21 +57,23 @@ namespace Ecom_API.Service
             return getUser(id);
         }
 
-        public void Register(UserRegisterReq model)
+        public async Task<bool> Register(UserRegisterReq model)
         {
-            // validate
-            if (_context.Users.Any(x => x.user_name == model.Username))
-                throw new AppException("Username '" + model.Username + "' is already taken");
+                var validate = await _unitOfWork.Users.FindWithCondition(c => c.username == model.username);
+                if (validate != null)
+                    throw new AppException("username '" + model.username + "' is already taken");
 
-            // map model to new user object
-            var user = _mapper.Map<User>(model);
+                // map model to new user object
+                var user = _mapper.Map<User>(model);
 
-            // hash password
-            user.password = Argon2.Hash(model.Password);
+                // hash password
+                user.password = Argon2.Hash(model.password);
 
-            // save user
-            _context.Users.Add(user);
-            _context.SaveChanges();
+                // save user
+                _context.Users.Add(user);
+            var effectedRow = _context.SaveChanges();
+
+                return effectedRow >= 1 ? true : false;
         }
 
         public void Update(int id, UserUpdateReq model)
@@ -73,12 +81,12 @@ namespace Ecom_API.Service
             var user = getUser(id);
 
             // validate
-            if (model.Username != user.user_name && _context.Users.Any(x => x.user_name == model.Username))
-                throw new AppException("Username '" + model.Username + "' is already taken");
+            if (model.username != user.username && _context.Users.Any(x => x.username == model.username))
+                throw new AppException("username '" + model.username + "' is already taken");
 
             // hash password if it was entered
-            if (!string.IsNullOrEmpty(model.Password))
-                user.password = Argon2.Hash(model.Password);
+            if (!string.IsNullOrEmpty(model.password))
+                user.password = Argon2.Hash(model.password);
 
             // copy model to user and save
             _mapper.Map(model, user);

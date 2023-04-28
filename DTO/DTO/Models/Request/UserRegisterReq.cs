@@ -5,15 +5,17 @@ namespace Ecom_API.DTO.Models;
 public class UserRegisterReq
 {
     [Required]
-    public string FullName { get; set; }
+    public string username { get; set; }
 
     [Required]
-    public string Phone { get; set; }
+    public string password { get; set; }
+    [Required]
+    public string fullname { get; set; }
 
     [Required]
-    public string Username { get; set; }
+    public string mail { get; set; }
 
     [Required]
-    public string Password { get; set; }
+    public string role { get; set; }
 }
 

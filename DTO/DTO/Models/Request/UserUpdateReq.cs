@@ -3,10 +3,11 @@ namespace Ecom_API.DTO.Models
 {
 	public class UserUpdateReq
 	{
-        public string FullName { get; set; }
-        public string Phone { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public string fullName { get; set; }
+        public string mail { get; set; }
+        public string role { get; set; }
     }
 }
 
